@@ -20,15 +20,17 @@ export default class PostList extends Component {
 
   render() {
     const { posts, loading } = this.state
-    return (
-      <div>
+    const { onPostDetail, onNewPost } = this.props;
+    return <div>
         <h1>게시물 목록</h1>
         <ul>
           {posts.map(post => (
-            <li key={post.id}>{post.title}</li>
+            <li key={post.id} onClick={() => onPostDetail(post.id)}>
+              {post.title}
+            </li>
           ))}
         </ul>
-      </div>
-    );
+        <button onClick={() => onNewPost()}>새 글 쓰기</button>
+      </div>;
   }
 }
