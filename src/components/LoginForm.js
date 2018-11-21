@@ -21,7 +21,7 @@ export default class LoginForm extends React.Component {
     // TODO: 게시글 목록 보여주기
   }
   render() {
-    const { onRegister, onNewPost } = this.props
+    const { onRegister } = this.props
     return (
       <React.Fragment>
         <form onSubmit={e => this.handleSubmit(e)}>

@@ -5,7 +5,7 @@ import LoginForm from "./components/LoginForm";
 import RegisterForm from "./components/RegisterForm";
 import PostList from "./components/PostList";
 import PostDetail from "./components/PostDetail";
-import NewPost from "./components/NewPost";
+import NewPostForm from "./components/NewPostForm";
 import EditPostForm from "./components/EditPostForm";
 
 // 로그인 폼에 회원가입 버튼 만들기
@@ -18,7 +18,8 @@ class App extends Component {
     // page === 'register' 회원가입
     // page === 'post-list' 게시물 목록
     // page === 'post-detail' 게시물 상세
-    // page === 'new-post' 새 글 쓰기
+    // page === 'new-post-form' 새 글 쓰기
+    // page === 'edit-post-form' 글 수정하기
     this.state = {
       page: "post-list",
       // 현재 보고 있는 게시물의 ID
@@ -41,9 +42,9 @@ class App extends Component {
       postId
     });
   }
-  handleNewPost() {
+  handleNewPostFormPage() {
     this.setState({
-      page: "new-post"
+      page: "new-post-form"
     });
   }
   handleEditPostFormPage(postId) {
@@ -63,15 +64,16 @@ class App extends Component {
         ) : page === "post-list" ? (
           <PostList
             onPostDetail={postId => this.handlePostDetailPage(postId)}
-            onNewPost={() => this.handleNewPost()}
+            onNewPost={() => this.handleNewPostFormPage()}
           />
         ) : page === "post-detail" ? (
           <PostDetail
             postId={this.state.postId}
             onEditPostFormPage={postId => this.handleEditPostFormPage(postId)}
-          />
-        ) : page === "new-post" ? (
-          <NewPost
+            onPostList={() => this.handlePostListPage()} 
+            />
+        ) : page === "new-post-form" ? (
+          <NewPostForm
             postId={this.state.postId}
             onPostDetail={postId => this.handlePostDetailPage(postId)}
           />

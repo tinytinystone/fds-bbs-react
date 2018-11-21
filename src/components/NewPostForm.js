@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import api from '../api';
 import PostForm from './PostForm'
 
-export default class NewPost extends Component {
+export default class NewPostForm extends Component {
   async handleSubmit(e){
     e.preventDefault()
     const title = e.target.elements.title.value
