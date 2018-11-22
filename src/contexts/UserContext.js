@@ -31,14 +31,13 @@ export default class UserProvider extends Component {
       id: null,
       username: null
     })
-    // TODO: 로그인 폼 보여주기
     this.props.onPostListPage()
   }
   async refreshUser() {
-    const res = await api.get("/me");
+    const { data: { id, username }} = await api.get("/me");
     this.setState({
-      id: res.data.id,
-      username: res.data.username
+      id,
+      username
     });
   }
   render() {
@@ -46,7 +45,8 @@ export default class UserProvider extends Component {
       username: this.state.username,
       id: this.state.id,
       login: this.login.bind(this),
-      logout: this.logout.bind(this)
+      logout: this.logout.bind(this),
+      onLoginFormPage: this.props.onLoginFormPage.bind(this)
     };
     return <Provider value={value}>{this.props.children}</Provider>;
   }

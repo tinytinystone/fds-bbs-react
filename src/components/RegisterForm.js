@@ -23,11 +23,11 @@ export default class RegisterForm extends Component {
       alert("이미 같은 이름이 사용 중입니다.");
       return
     }
-    const res = await api.post('/users/register/', {
+    const { data: token } = await api.post('/users/register/', {
       username,
       password
     })
-    localStorage.setItem('token', res.data.token)
+    localStorage.setItem('token', token)
     // TODO: 게시글 목록 보여주기
     this.props.onPostList()
   }

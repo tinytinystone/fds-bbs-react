@@ -62,7 +62,10 @@ class App extends Component {
   render() {
     const { page } = this.state;
     return (
-      <UserProvider onPostListPage={() => this.handlePostListPage()}>
+      <UserProvider
+        onPostListPage={() => this.handlePostListPage()}
+        onLoginFormPage={() => this.handleLoginFormPage()}
+      >
         <div className="App">
           {page === "login" ? (
             <LoginForm onRegister={() => this.handleRegisterPage()} />
@@ -70,7 +73,6 @@ class App extends Component {
             <RegisterForm onPostList={() => this.handlePostListPage()} />
           ) : page === "post-list" ? (
             <PostList
-              onLoginFormPage={() => this.handleLoginFormPage()}
               onPostDetail={postId => this.handlePostDetailPage(postId)}
               onNewPost={() => this.handleNewPostFormPage()}
             />
