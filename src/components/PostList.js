@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import api from "../api";
 import Layout from "./Layout";
-import {UserConsumer} from '../contexts/UserContext'
+import { UserConsumer } from "../contexts/UserContext";
 
 export default class PostList extends Component {
   constructor(props) {
@@ -22,9 +22,9 @@ export default class PostList extends Component {
 
   render() {
     const { posts, loading } = this.state;
-    const { onPostDetail, onNewPost } = this.props;
+    const { onPostDetail, onNewPost, onLoginFormPage } = this.props;
     return (
-      <Layout>
+      <Layout title="게시물 목록" onLoginFormPage={onLoginFormPage}>
         <h1>게시물 목록</h1>
         <ul>
           {posts.map(post => (

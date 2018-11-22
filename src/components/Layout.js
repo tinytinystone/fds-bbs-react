@@ -3,6 +3,7 @@ import { UserConsumer } from "../contexts/UserContext";
 
 export default class Layout extends Component {
   render() {
+    const { onLoginFormPage } = this.props
     return (
       <div>
         <div className="header">
@@ -14,7 +15,7 @@ export default class Layout extends Component {
                   <button onClick={logout}>Logout</button>
                 </React.Fragment>
               ) : (
-                <div>로그인 해주세요.</div>
+                <button onClick={onLoginFormPage}>로그인 해주세요.</button>
               )
             }
           </UserConsumer>

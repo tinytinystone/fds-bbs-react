@@ -23,6 +23,7 @@ export default class UserProvider extends Component {
     });
     localStorage.setItem("token", res.data.token);
     await this.refreshUser();
+    this.props.onPostListPage();
   }
   async logout() {
     localStorage.removeItem('token')
@@ -31,6 +32,7 @@ export default class UserProvider extends Component {
       username: null
     })
     // TODO: 로그인 폼 보여주기
+    this.props.onPostListPage()
   }
   async refreshUser() {
     const res = await api.get("/me");

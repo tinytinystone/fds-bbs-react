@@ -7,7 +7,7 @@ import PostList from "./components/PostList";
 import PostDetail from "./components/PostDetail";
 import NewPostForm from "./components/NewPostForm";
 import EditPostForm from "./components/EditPostForm";
-import {UserProvider} from './contexts/UserContext'
+import { UserProvider } from "./contexts/UserContext";
 
 // 로그인 폼에 회원가입 버튼 만들기
 // 회원가입 버튼 클릭하면 회원가입 폼 보여주기
@@ -54,10 +54,15 @@ class App extends Component {
       postId
     });
   }
+  handleLoginFormPage() {
+    this.setState({
+      page: "login"
+    });
+  }
   render() {
     const { page } = this.state;
     return (
-      <UserProvider>
+      <UserProvider onPostListPage={() => this.handlePostListPage()}>
         <div className="App">
           {page === "login" ? (
             <LoginForm onRegister={() => this.handleRegisterPage()} />
@@ -65,6 +70,7 @@ class App extends Component {
             <RegisterForm onPostList={() => this.handlePostListPage()} />
           ) : page === "post-list" ? (
             <PostList
+              onLoginFormPage={() => this.handleLoginFormPage()}
               onPostDetail={postId => this.handlePostDetailPage(postId)}
               onNewPost={() => this.handleNewPostFormPage()}
             />
