@@ -22,8 +22,15 @@ export default class UserProvider extends Component {
       password
     });
     localStorage.setItem("token", res.data.token);
-    // TODO: 게시글 목록 보여주기
     await this.refreshUser();
+  }
+  async logout() {
+    localStorage.removeItem('token')
+    this.setState({
+      id: null,
+      username: null
+    })
+    // TODO: 로그인 폼 보여주기
   }
   async refreshUser() {
     const res = await api.get("/me");
@@ -36,7 +43,8 @@ export default class UserProvider extends Component {
     const value = {
       username: this.state.username,
       id: this.state.id,
-      login: this.login.bind(this)
+      login: this.login.bind(this),
+      logout: this.logout.bind(this)
     };
     return <Provider value={value}>{this.props.children}</Provider>;
   }
