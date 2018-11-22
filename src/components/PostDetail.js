@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import api from "../api";
 import CommentList from "./CommentList";
 import CommentForm from "./CommentForm";
+import Layout from './Layout'
 
 export default class PostDetail extends Component {
   constructor(props) {
@@ -70,6 +71,7 @@ export default class PostDetail extends Component {
     const { postId, onEditPostFormPage } = this.props;
     const { title, body, username, comments, commentUserList } = this.state;
     return (
+      <Layout>
       <div className="post">
         <button onClick={() => onEditPostFormPage(postId)}>수정</button>
         <button onClick={e => this.handleDeletePost(e, postId)}>삭제</button>
@@ -81,6 +83,7 @@ export default class PostDetail extends Component {
           <CommentForm onSubmit={e => this.handleCommentSubmit(e, postId)} />
         </div>
       </div>
+      </Layout>
     )
   }
 }

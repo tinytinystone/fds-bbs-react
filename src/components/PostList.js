@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import api from "../api";
+import Layout from "./Layout";
 
 export default class PostList extends Component {
   constructor(props) {
@@ -12,16 +13,17 @@ export default class PostList extends Component {
   }
 
   async componentDidMount() {
-    const { data: posts } = await api.get('/posts')
+    const { data: posts } = await api.get("/posts");
     this.setState({
       posts
-    })
+    });
   }
 
   render() {
-    const { posts, loading } = this.state
+    const { posts, loading } = this.state;
     const { onPostDetail, onNewPost } = this.props;
-    return <div>
+    return (
+      <div>
         <h1>게시물 목록</h1>
         <ul>
           {posts.map(post => (
@@ -31,6 +33,7 @@ export default class PostList extends Component {
           ))}
         </ul>
         <button onClick={() => onNewPost()}>새 글 쓰기</button>
-      </div>;
+      </div>
+    );
   }
 }
