@@ -3,6 +3,7 @@ import api from "../api";
 import CommentList from "./CommentList";
 import CommentForm from "./CommentForm";
 import Layout from './Layout'
+import { UserConsumer } from '../contexts/UserContext'
 
 export default class PostDetail extends Component {
   constructor(props) {
@@ -11,6 +12,7 @@ export default class PostDetail extends Component {
     this.state = {
       title: "",
       body: "",
+      userId: null,
       username: "",
       comments: [],
       commentUserList: [],
@@ -45,6 +47,7 @@ export default class PostDetail extends Component {
       title,
       body,
       username: user.username,
+      userId: user.id,
       comments,
       commentUserList
     });
@@ -72,8 +75,14 @@ export default class PostDetail extends Component {
     const { title, body, username, comments, commentUserList } = this.state;
     return (
       <Layout>
+        <UserConsumer>
+          {({id}) => {
+            if (this.state.userId === id) {
+              return (<button onClick={() => onEditPostFormPage(postId)}>수정</button>)
+            }
+          }}
+        </UserConsumer>
       <div className="post">
-        <button onClick={() => onEditPostFormPage(postId)}>수정</button>
         <button onClick={e => this.handleDeletePost(e, postId)}>삭제</button>
         <h1>{title}</h1>
         <div>쓴 사람: {username}</div>
