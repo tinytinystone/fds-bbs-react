@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import api from "../api";
 import Layout from "./Layout";
-import { UserConsumer } from "../contexts/UserContext";
+import { PageConsumer } from "../contexts/PageContext";
 
 export default class PostList extends Component {
   constructor(props) {
@@ -22,19 +22,24 @@ export default class PostList extends Component {
 
   render() {
     const { posts, loading } = this.state;
-    const { onPostDetail, onNewPost } = this.props;
     return (
-      <Layout title="게시물 목록">
-        <h1>게시물 목록</h1>
-        <ul>
-          {posts.map(post => (
-            <li key={post.id} onClick={() => onPostDetail(post.id)}>
-              {post.title}
-            </li>
-          ))}
-        </ul>
-        <button onClick={() => onNewPost()}>새 글 쓰기</button>
-      </Layout>
+      <PageConsumer>
+        {({postId, onPostDetail, onNewPostForm}) => {
+          return (
+            <Layout title="게시물 목록">
+              <h1>게시물 목록</h1>
+              <ul>
+                {posts.map(post => (
+                  <li key={post.id} onClick={postId => onPostDetail(post.id)}>
+                    {post.title}
+                  </li>
+                ))}
+              </ul>
+              <button onClick={onNewPostForm}>새 글 쓰기</button>
+            </Layout>
+          )
+        }}
+      </PageConsumer>
     );
   }
 }

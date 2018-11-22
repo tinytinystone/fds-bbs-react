@@ -8,7 +8,9 @@ export default class UserProvider extends Component {
     super(props);
     this.state = {
       id: null,
-      username: null
+      username: null,
+      login: this.login.bind(this),
+      logout: this.logout.bind(this),
     };
   }
   async componentDidMount() {
@@ -41,14 +43,7 @@ export default class UserProvider extends Component {
     });
   }
   render() {
-    const value = {
-      username: this.state.username,
-      id: this.state.id,
-      login: this.login.bind(this),
-      logout: this.logout.bind(this),
-      onLoginFormPage: this.props.onLoginFormPage.bind(this)
-    };
-    return <Provider value={value}>{this.props.children}</Provider>;
+    return <Provider value={this.state}>{this.props.children}</Provider>;
   }
 }
 

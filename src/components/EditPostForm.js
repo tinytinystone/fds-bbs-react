@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import api from "../api";
 import PostForm from "./PostForm";
+import { PageConsumer } from "../contexts/PageContext";
 
-export default class NewPost extends Component {
+class NewPost extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -10,11 +11,10 @@ export default class NewPost extends Component {
       body: ""
     };
   }
-
   async componentDidMount() {
     const {
       data: { title, body }
-    } = await api.get(`/posts/${this.props.postId}`);
+    } = await api.get("posts/" + this.props.postId);
     this.setState({
       title,
       body
@@ -31,24 +31,33 @@ export default class NewPost extends Component {
         body
       });
       this.props.onPostDetail(res.data.id);
-    }
-    catch (e) {
-      alert('자신이 쓴 글 이외에는 수정할 수 없습니다.')
+    } catch (e) {
+      alert("자신이 쓴 글 이외에는 수정할 수 없습니다.");
     }
   }
   render() {
     const { title, body } = this.state;
-    if ( !title ) {
-      return 'Loading...'
+    if (!title) {
+      return "Loading...";
     }
     return (
-      <div>
-        <PostForm
-          title={title}
-          body={body}
-          onSubmit={e => this.handleSubmit(e)}
-        />
-      </div>
+      <PostForm
+        title={title}
+        body={body}
+        onSubmit={(e, postId, onPostDetail) =>
+          this.handleSubmit(e, postId, onPostDetail)
+        }
+      />
     );
   }
 }
+
+export default props => {
+  return (
+    <PageConsumer>
+      {({ postId, onPostDetail }) => (
+        <NewPost {...props} postId={postId} onPostDetail={onPostDetail} />
+      )}
+    </PageConsumer>
+  );
+};

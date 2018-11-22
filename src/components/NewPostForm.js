@@ -2,8 +2,11 @@ import React, { Component } from 'react'
 import api from '../api';
 import PostForm from './PostForm'
 
+import { PageConsumer } from "../contexts/PageContext";
+import Layout from './Layout';
+
 export default class NewPostForm extends Component {
-  async handleSubmit(e){
+  async handleSubmit(e, onPostDetail){
     e.preventDefault()
     const title = e.target.elements.title.value
     const body = e.target.elements.body.value
@@ -11,13 +14,19 @@ export default class NewPostForm extends Component {
       title,
       body
     })
-    this.props.onPostDetail(res.data.id);
+    onPostDetail(res.data.id);
   }
   render() {
     return (
-      <div>
-        <PostForm onSubmit={e => this.handleSubmit(e)} />
-      </div>
+      <PageConsumer>
+        {({onPostDetail}) => {
+          return (
+            <Layout>
+              <PostForm onSubmit={e => this.handleSubmit(e, onPostDetail)} />
+            </Layout>
+          )
+        }}
+      </PageConsumer>
     )
   }
 }
