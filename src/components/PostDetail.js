@@ -4,9 +4,8 @@ import CommentList from "./CommentList";
 import CommentForm from "./CommentForm";
 import Layout from "./Layout";
 
-import { UserConsumer } from "../contexts/UserContext";
-import { PageConsumer } from "../contexts/PageContext";
-import PostList from "./PostList";
+import { withUser } from "../contexts/UserContext";
+import { withPage } from "../contexts/PageContext";
 
 class PostDetail extends Component {
   constructor(props) {
@@ -72,17 +71,14 @@ class PostDetail extends Component {
       commentUserList,
       loading
     } = this.state;
-    const { postId, onEditPostForm, onPostList } = this.props
+    const { postId, onEditPostForm, onPostList } = this.props;
     return (
       <Layout>
-        <UserConsumer>
           {({ id }) => {
             if (userId === id) {
               return (
                 <React.Fragment>
-                  <button onClick={() => onEditPostForm(postId)}>
-                    수정
-                  </button>
+                  <button onClick={() => onEditPostForm(postId)}>수정</button>
                   <button onClick={e => this.handleDeletePost(e, postId)}>
                     삭제
                   </button>
@@ -90,7 +86,6 @@ class PostDetail extends Component {
               );
             }
           }}
-        </UserConsumer>
         <div className="post">
           <button onClick={onPostList}>목록으로 가기</button>
           <h1>{title}</h1>
@@ -124,17 +119,4 @@ class PostDetail extends Component {
   }
 }
 
-export default props => {
-  return (
-    <PageConsumer>
-      {({ postId, onEditPostForm, onPostList }) => (
-        <PostDetail
-          {...props}
-          postId={postId}
-          onEditPostForm={onEditPostForm}
-          onPostList={onPostList}
-        />
-      )}
-    </PageConsumer>
-  );
-};
+export default withPage(withUser(PostDetail));

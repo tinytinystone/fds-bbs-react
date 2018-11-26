@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import api from "../api";
+import { withPage } from './PageContext'
 
 const { Provider, Consumer } = React.createContext();
 
@@ -25,7 +26,7 @@ export default class UserProvider extends Component {
     });
     localStorage.setItem("token", res.data.token);
     await this.refreshUser();
-    this.props.onPostListPage();
+    this.props.onPostList()
   }
   async logout() {
     localStorage.removeItem('token')
@@ -33,7 +34,7 @@ export default class UserProvider extends Component {
       id: null,
       username: null
     })
-    this.props.onPostListPage()
+    this.props.onPostList();
   }
   async refreshUser() {
     const { data: { id, username }} = await api.get("/me");
@@ -47,4 +48,16 @@ export default class UserProvider extends Component {
   }
 }
 
-export { UserProvider, Consumer as UserConsumer };
+function withUser(WrappedComponent) {
+  return function (props) {
+    return (
+      <Consumer>
+        {value => <WrappedComponent {...value} {...props}></WrappedComponent>}
+      </Consumer>
+    )
+  }
+}
+
+UserProvider = withPage(UserProvider);
+
+export { UserProvider, Consumer as UserConsumer, withUser };

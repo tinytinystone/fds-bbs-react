@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import api from "../api";
 import Layout from "./Layout";
-import { PageConsumer } from "../contexts/PageContext";
+import { withPage } from "../contexts/PageContext";
 
-export default class PostList extends Component {
+class PostList extends Component {
   constructor(props) {
     super(props);
 
@@ -21,25 +21,22 @@ export default class PostList extends Component {
   }
 
   render() {
+    const { postId, onPostDetail, onNewPostForm } = this.props;
     const { posts, loading } = this.state;
     return (
-      <PageConsumer>
-        {({postId, onPostDetail, onNewPostForm}) => {
-          return (
-            <Layout title="게시물 목록">
-              <h1>게시물 목록</h1>
-              <ul>
-                {posts.map(post => (
-                  <li key={post.id} onClick={postId => onPostDetail(post.id)}>
-                    {post.title}
-                  </li>
-                ))}
-              </ul>
-              <button onClick={onNewPostForm}>새 글 쓰기</button>
-            </Layout>
-          )
-        }}
-      </PageConsumer>
+      <Layout title="게시물 목록">
+        <h1>게시물 목록</h1>
+        <ul>
+          {posts.map(post => (
+            <li key={post.id} onClick={postId => onPostDetail(post.id)}>
+              {post.title}
+            </li>
+          ))}
+        </ul>
+        <button onClick={onNewPostForm}>새 글 쓰기</button>
+      </Layout>
     );
   }
 }
+
+export default withPage(PostList);

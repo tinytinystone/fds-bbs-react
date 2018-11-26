@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { withUser } from "./UserContext";
 
 const { Provider, Consumer } = React.createContext();
 
@@ -59,6 +60,23 @@ export default class PageProvider extends Component {
   render() {
     return <Provider value={this.state}>{this.props.children}</Provider>;
   }
+
 }
 
-export { PageProvider, Consumer as PageConsumer };
+function withPage(WrappedComponent) {
+  function withPage(props) {
+    return (
+      <Consumer>
+        {value => <WrappedComponent {...value} {...props}></WrappedComponent>}
+      </Consumer>
+    )
+  }
+  withPage.displayName = `withPage(${getDisplayName(WrappedComponent)})`
+  return withPage
+}
+
+function getDisplayName(WrappedComponent) {
+  return WrappedComponent.displayName || WrappedComponent.name || "Component";
+}
+
+export { PageProvider, Consumer as PageConsumer, withPage };

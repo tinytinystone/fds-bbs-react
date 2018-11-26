@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { BrowserRouter, Route, Link } from "react-router-dom";
+
 import "./App.css";
 
 import LoginForm from "./components/LoginForm";
@@ -19,36 +21,35 @@ import { PageProvider, PageConsumer } from "./contexts/PageContext";
 export default class App extends Component {
   render() {
     return (
-      <PageProvider>
-        <UserProvider>
-          <div className="App">
-            <PageConsumer>
-              {({ page }) => {
-                return page === "login" ? (
-                  <Modal>
-                    <div className="modal">
-                      <LoginForm onRegister={this.onRegister} />
-                    </div>
-                  </Modal>
-                ) : page === "register" ? (
-                  <RegisterForm onPostList={this.onPostList} />
-                ) : page === "post-list" ? (
-                  <PostList
-                    onNewPostForm={this.onNewPostForm}
-                    onPostDetail={this.onPostDetail}
-                  />
-                ) : page === "post-detail" ? (
-                  <PostDetail onEditPostForm={this.onEditPostForm} />
-                ) : page === "new-post-form" ? (
-                  <NewPostForm />
-                ) : page === "edit-post-form" ? (
-                  <EditPostForm />
-                ) : null;
-              }}
-            </PageConsumer>
-          </div>
-        </UserProvider>
-      </PageProvider>
+      <BrowserRouter>
+        <PageProvider>
+          <UserProvider>
+            <div className="App">
+              <PageConsumer>
+                {({page}) => {
+                  return page === "login" ? (
+                    <Modal>
+                      <div className="modal">
+                        <LoginForm />
+                      </div>
+                    </Modal>
+                  ) : page === "register" ? (
+                    <RegisterForm />
+                  ) : page === "post-list" ? (
+                    <PostList />
+                  ) : page === "post-detail" ? (
+                    <PostDetail />
+                  ) : page === "new-post-form" ? (
+                    <NewPostForm />
+                  ) : page === "edit-post-form" ? (
+                    <EditPostForm />
+                  ) : null;
+                }}
+              </PageConsumer>
+            </div>
+          </UserProvider>
+        </PageProvider>
+      </BrowserRouter>
     );
   }
 }
