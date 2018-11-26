@@ -1,0 +1,12 @@
+$main-color: green;
+$sub-color: red;
+$main-border: 1px solid silver;
+
+@mixin common-border {
+  border: $main-border;
+}
+@mixin desktop {
+  @media screen and (min-width: 768px) {
+    @content
+  }
+}

@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { BrowserRouter, Route, Link } from "react-router-dom";
 
-import "./App.css";
-
 import LoginForm from "./components/LoginForm";
 import RegisterForm from "./components/RegisterForm";
 import PostList from "./components/PostList";
