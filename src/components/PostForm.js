@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import s from "./PostForm.module.scss";
 import classNames from 'classnames';
+import { withLoader } from "./Loader";
 
-export default class PostForm extends Component {
+class PostForm extends Component {
   render() {
+    console.log(this.props)
     const { editing } = this.props;
     const titleClass = classNames(s.titleInput, {
       [s.editing]: editing
@@ -31,3 +33,5 @@ export default class PostForm extends Component {
     );
   }
 }
+
+export default withLoader(PostForm)

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import api from "../api";
 import PostForm from "./PostForm";
 import { PageConsumer } from "../contexts/PageContext";
+// import { withLoader } from "./Loader";
 
 class NewPost extends Component {
   constructor(props) {
@@ -37,11 +38,9 @@ class NewPost extends Component {
   }
   render() {
     const { title, body } = this.state;
-    if (!title) {
-      return "Loading...";
-    }
     return (
       <PostForm
+        loading={!title}
         editing={true}
         title={title}
         body={body}

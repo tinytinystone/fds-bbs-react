@@ -6,10 +6,8 @@ import { linkTo } from "@storybook/addon-links";
 
 import { Button, Welcome } from "@storybook/react/demo";
 
-import PostForm from './PostForm'
+import PostForm from "./PostForm";
 
 storiesOf("PostForm", module)
-  .add("default", () => (
-    <PostForm />
-));
-
+  .add("default", () => <PostForm />)
+  .add("loading", () => <PostForm loading={true} />);
