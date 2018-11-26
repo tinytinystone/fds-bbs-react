@@ -1,10 +1,12 @@
-$main-color: green;
+$main-color: rgba(255, 192, 203, 0.6);
 $sub-color: red;
 $main-border: 1px solid silver;
+$font: 'Hack';
 
 @mixin common-border {
   border: $main-border;
 }
+
 @mixin desktop {
   @media screen and (min-width: 768px) {
     @content

@@ -45,8 +45,8 @@ class NewPost extends Component {
         editing={true}
         title={title}
         body={body}
-        onSubmit={(e, postId, onPostDetail) =>
-          this.handleSubmit(e, postId, onPostDetail)
+        onSubmit={e =>
+          this.handleSubmit(e)
         }
       />
     );

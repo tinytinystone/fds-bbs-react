@@ -3,7 +3,6 @@ import React, { Component } from "react";
 export default class CommentList extends Component {
   render() {
     const { comments, commentUserList } = this.props;
-    console.log(comments)
     return (
       <div>
         <h2>댓글</h2>

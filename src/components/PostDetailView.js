@@ -21,6 +21,7 @@ class PostDetailView extends Component {
       onPostList,
       id
     } = this.props;
+    console.log(commentUserList);
     return (
       <Layout>
         {userId === id && (
@@ -49,11 +50,15 @@ class PostDetailView extends Component {
               border: "1px solid #aaa"
             }}
           >
-            <CommentList
-              postId={currentPostId}
-              comments={comments}
-              commentUserList={commentUserList}
-            />
+            {comments && comments.length > 0 ? (
+              <CommentList
+                postId={currentPostId}
+                comments={comments}
+                commentUserList={commentUserList}
+              />
+            ) : (
+              <div>댓글이 없습니다.</div>
+            )}
             <CommentForm
               onSubmit={e => this.handleCommentSubmit(e, currentPostId)}
             />
