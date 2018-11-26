@@ -14,7 +14,7 @@ export default class PageProvider extends Component {
       // page === 'new-post-form' 새 글 쓰기
       // page === 'edit-post-form' 글 수정하기}
       page: "post-list",
-      postId: null,
+      currentPostId: null,
       showModal: false,
       onLoginForm: this.onLoginForm.bind(this),
       onRegister: this.onRegister.bind(this),
@@ -25,9 +25,10 @@ export default class PageProvider extends Component {
     };
   }
   onRegister() {
-    this.setState({
-      page: "register"
-    });
+    this.setState(prevState => ({
+      showModal: !prevState.showModal,
+      page: "register",
+    }));
   }
   onPostList() {
     this.setState({
@@ -37,7 +38,7 @@ export default class PageProvider extends Component {
   onPostDetail(postId) {
     this.setState({
       page: "post-detail",
-      postId
+      currentPostId: postId
     });
   }
   onNewPostForm() {
@@ -48,7 +49,7 @@ export default class PageProvider extends Component {
   onEditPostForm(postId) {
     this.setState({
       page: "edit-post-form",
-      postId
+      currentPostId: postId
     });
   }
   onLoginForm() {

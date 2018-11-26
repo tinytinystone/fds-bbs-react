@@ -25,7 +25,7 @@ class PostList extends Component {
   }
 
   render() {
-    const { postId, onPostDetail, onNewPostForm } = this.props;
+    const { onPostDetail, onNewPostForm } = this.props;
     const { posts, loading } = this.state;
     const titleClass = classNames(
       'PostList__title', 
@@ -40,7 +40,7 @@ class PostList extends Component {
             <li
               className="PostList__item"
               key={post.id}
-              onClick={postId => onPostDetail(postId)}
+              onClick={() => onPostDetail(post.id)}
             >
               {post.title}
             </li>

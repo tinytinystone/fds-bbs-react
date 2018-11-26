@@ -14,7 +14,7 @@ class NewPost extends Component {
   async componentDidMount() {
     const {
       data: { title, body }
-    } = await api.get("posts/" + this.props.postId);
+    } = await api.get("posts/" + this.props.currentPostId);
     this.setState({
       title,
       body
@@ -26,7 +26,7 @@ class NewPost extends Component {
       e.preventDefault();
       const title = e.target.elements.title.value;
       const body = e.target.elements.body.value;
-      const res = await api.patch("/posts/" + this.props.postId, {
+      const res = await api.patch("/posts/" + this.props.currentPostId, {
         title,
         body
       });
@@ -42,6 +42,7 @@ class NewPost extends Component {
     }
     return (
       <PostForm
+        editing={true}
         title={title}
         body={body}
         onSubmit={(e, postId, onPostDetail) =>
@@ -55,8 +56,8 @@ class NewPost extends Component {
 export default props => {
   return (
     <PageConsumer>
-      {({ postId, onPostDetail }) => (
-        <NewPost {...props} postId={postId} onPostDetail={onPostDetail} />
+      {({ currentPostId, onPostDetail }) => (
+        <NewPost {...props} currentPostId={currentPostId} onPostDetail={onPostDetail} />
       )}
     </PageConsumer>
   );
