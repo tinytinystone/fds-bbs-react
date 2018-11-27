@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import api from "../api";
 import PostForm from "./PostForm";
-import { PageConsumer } from "../contexts/PageContext";
-// import { withLoader } from "./Loader";
 
-class NewPost extends Component {
+import { withLoading } from "../hoc/withLoading";
+import { withPage } from "../contexts/PageContext";
+
+class EditPostForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -43,16 +44,4 @@ class NewPost extends Component {
   }
 }
 
-export default props => {
-  return (
-    <PageConsumer>
-      {({ currentPostId, onPostDetail }) => (
-        <NewPost
-          {...props}
-          currentPostId={currentPostId}
-          onPostDetail={onPostDetail}
-        />
-      )}
-    </PageConsumer>
-  );
-};
+export default withPage(EditPostForm)

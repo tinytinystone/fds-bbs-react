@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import s from "./PostForm.module.scss";
 import classNames from "classnames";
-import { withLoader } from "./Loader";
+import { withLoading } from "../hoc/withLoading";
 
 class PostForm extends Component {
   static defaultProps = {
@@ -22,7 +22,7 @@ class PostForm extends Component {
             e.preventDefault();
             const title = e.target.elements.title.value
             const body = e.target.elements.body.value;
-            this.props.onSubmit(title, body);
+            onSubmit(title, body);
           }}
         >
           <label htmlFor="title">제목</label>
@@ -46,4 +46,4 @@ class PostForm extends Component {
   }
 }
 
-export default withLoader(PostForm);
+export default withLoading(PostForm);

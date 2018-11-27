@@ -21,9 +21,8 @@ class PostDetailView extends Component {
       onPostList,
       id
     } = this.props;
-    console.log(commentUserList);
     return (
-      <Layout>
+      <React.Fragment>
         {userId === id && (
           <React.Fragment>
             <button onClick={() => onEditPostForm(currentPostId)}>수정</button>
@@ -64,7 +63,7 @@ class PostDetailView extends Component {
             />
           </div>
         </div>
-      </Layout>
+      </React.Fragment>
     );
   }
 }

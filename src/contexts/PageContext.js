@@ -65,15 +65,15 @@ export default class PageProvider extends Component {
 }
 
 function withPage(WrappedComponent) {
-  function withPage(props) {
+  function WithPage(props) {
     return (
       <Consumer>
         {value => <WrappedComponent {...value} {...props}></WrappedComponent>}
       </Consumer>
     )
   }
-  withPage.displayName = `withPage(${getDisplayName(WrappedComponent)})`
-  return withPage
+  WithPage.displayName = `withPage(${getDisplayName(WrappedComponent)})`
+  return WithPage
 }
 
 function getDisplayName(WrappedComponent) {

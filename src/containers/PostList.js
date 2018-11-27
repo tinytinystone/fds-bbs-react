@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import api from "../api";
 import { withPage } from "../contexts/PageContext";
 
-import '../components/PostList.scss'
+import "../components/PostList.scss";
 import PostListView from "../components/PostListView";
 
 class PostList extends Component {
@@ -11,9 +11,8 @@ class PostList extends Component {
     this.state = {
       posts: [],
       loading: true
-    }
+    };
   }
-
   async componentDidMount() {
     const { data: posts } = await api.get("/posts");
     this.setState({
@@ -21,12 +20,9 @@ class PostList extends Component {
       loading: false
     });
   }
-
   render() {
     const { posts, loading } = this.state;
-    return (
-      <PostListView posts={posts} loading={loading} />
-    )
+    return <PostListView posts={posts} loading={loading} />;
   }
 }
 
