@@ -4,6 +4,10 @@ import classNames from 'classnames';
 import { withLoader } from "./Loader";
 
 class PostForm extends Component {
+  static defaultProps = {
+    // true가 주어지면 편집모드 스타일이 적용됨. (이렇게 설명을 써준다.)
+    editing: false
+  }
   render() {
     console.log(this.props)
     const { editing } = this.props;
@@ -33,5 +37,6 @@ class PostForm extends Component {
     );
   }
 }
+
 
 export default withLoader(PostForm)
