@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 
 import LoginForm from './components/LoginForm';
-import RegisterForm from './components/RegisterForm';
+import RegisterPage from './pages/RegisterPage';
 import PostListPage from './pages/PostListPage';
 import PostDetailPage from './pages/PostDetailPage';
 import NewPostForm from './components/NewPostForm';
@@ -32,7 +32,7 @@ export default class App extends Component {
                       </div>
                     </Modal>
                   ) : page === 'register' ? (
-                    <RegisterForm />
+                    <RegisterPage />
                   ) : page === 'post-list' ? (
                     <PostListPage />
                   ) : page === 'post-detail' ? (

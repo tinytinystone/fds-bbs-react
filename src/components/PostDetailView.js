@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
-import CommentList from '../containers/CommentList';
+import CommentList from './CommentList';
 import CommentForm from './CommentForm';
 
 import { withUser } from '../contexts/UserContext';
@@ -8,6 +8,9 @@ import { withPage } from '../contexts/PageContext';
 import { withLoading } from '../hoc/withLoading';
 
 class PostDetailView extends Component {
+  static defaultProps = {
+    title: null,
+  };
   render() {
     const {
       title,
@@ -24,7 +27,7 @@ class PostDetailView extends Component {
     return (
       <React.Fragment>
         <Helmet>
-          <title>게시물 - {title}</title>
+          <title>게시물: {title}</title>
         </Helmet>
         {userId === id && (
           <React.Fragment>

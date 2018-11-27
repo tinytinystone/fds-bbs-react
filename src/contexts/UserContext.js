@@ -8,8 +8,8 @@ export default class UserProvider extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: null,
-      username: null,
+      currentId: null,
+      currentUsername: null,
       login: this.login.bind(this),
       logout: this.logout.bind(this),
     };
@@ -31,8 +31,8 @@ export default class UserProvider extends Component {
   async logout() {
     localStorage.removeItem('token');
     this.setState({
-      id: null,
-      username: null,
+      currentId: null,
+      currentUsername: null,
     });
     this.props.onPostList();
   }
@@ -41,8 +41,8 @@ export default class UserProvider extends Component {
       data: { id, username },
     } = await api.get('/me');
     this.setState({
-      id,
-      username,
+      currentId: id,
+      currentUsername: username,
     });
   }
   render() {

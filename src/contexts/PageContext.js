@@ -13,7 +13,7 @@ export default class PageProvider extends Component {
       // page === 'post-detail' 게시물 상세
       // page === 'new-post-form' 새 글 쓰기
       // page === 'edit-post-form' 글 수정하기}
-      page: 'post-list',
+      page: 'register',
       currentPostId: null,
       showModal: false,
       onLoginForm: this.onLoginForm.bind(this),
