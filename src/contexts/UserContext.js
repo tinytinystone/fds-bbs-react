@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import api from "../api";
-import { withPage } from './PageContext'
+import React, { Component } from 'react';
+import api from '../api';
+import { withPage } from './PageContext';
 
 const { Provider, Consumer } = React.createContext();
 
@@ -15,32 +15,34 @@ export default class UserProvider extends Component {
     };
   }
   async componentDidMount() {
-    if (localStorage.getItem("token")) {
+    if (localStorage.getItem('token')) {
       await this.refreshUser();
     }
   }
   async login(username, password) {
-    const res = await api.post("/users/login/", {
+    const res = await api.post('/users/login/', {
       username,
-      password
+      password,
     });
-    localStorage.setItem("token", res.data.token);
+    localStorage.setItem('token', res.data.token);
     await this.refreshUser();
-    this.props.onPostList()
+    this.props.onPostList();
   }
   async logout() {
-    localStorage.removeItem('token')
+    localStorage.removeItem('token');
     this.setState({
       id: null,
-      username: null
-    })
+      username: null,
+    });
     this.props.onPostList();
   }
   async refreshUser() {
-    const { data: { id, username }} = await api.get("/me");
+    const {
+      data: { id, username },
+    } = await api.get('/me');
     this.setState({
       id,
-      username
+      username,
     });
   }
   render() {
@@ -49,13 +51,11 @@ export default class UserProvider extends Component {
 }
 
 function withUser(WrappedComponent) {
-  return function (props) {
+  return function(props) {
     return (
-      <Consumer>
-        {value => <WrappedComponent {...value} {...props}></WrappedComponent>}
-      </Consumer>
-    )
-  }
+      <Consumer>{value => <WrappedComponent {...value} {...props} />}</Consumer>
+    );
+  };
 }
 
 UserProvider = withPage(UserProvider);

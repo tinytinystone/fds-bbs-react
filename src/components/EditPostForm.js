@@ -1,40 +1,33 @@
-import React, { Component } from "react";
-import api from "../api";
-import PostForm from "./PostForm";
-import { PageConsumer } from "../contexts/PageContext";
-// import { withLoader } from "./Loader";
+import React, { Component } from 'react';
+import api from '../api';
+import PostForm from './PostForm';
 
-class NewPost extends Component {
+import { withPage } from '../contexts/PageContext';
+
+class EditPostForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: "",
-      body: ""
+      title: '',
+      body: '',
     };
   }
   async componentDidMount() {
     const {
-      data: { title, body }
-    } = await api.get("posts/" + this.props.currentPostId);
+      data: { title, body },
+    } = await api.get('posts/' + this.props.currentPostId);
     this.setState({
       title,
-      body
+      body,
     });
   }
 
-  async handleSubmit(e) {
-    try {
-      e.preventDefault();
-      const title = e.target.elements.title.value;
-      const body = e.target.elements.body.value;
-      const res = await api.patch("/posts/" + this.props.currentPostId, {
-        title,
-        body
-      });
-      this.props.onPostDetail(res.data.id);
-    } catch (e) {
-      alert("자신이 쓴 글 이외에는 수정할 수 없습니다.");
-    }
+  async handleSubmit(title, body) {
+    const { data: id } = await api.patch('/posts/' + this.props.currentPostId, {
+      title,
+      body,
+    });
+    this.props.onPostDetail(id);
   }
   render() {
     const { title, body } = this.state;
@@ -44,20 +37,10 @@ class NewPost extends Component {
         editing={true}
         title={title}
         body={body}
-        onSubmit={e =>
-          this.handleSubmit(e)
-        }
+        onSubmit={(title, body) => this.handleSubmit(title, body)}
       />
     );
   }
 }
 
-export default props => {
-  return (
-    <PageConsumer>
-      {({ currentPostId, onPostDetail }) => (
-        <NewPost {...props} currentPostId={currentPostId} onPostDetail={onPostDetail} />
-      )}
-    </PageConsumer>
-  );
-};
+export default withPage(EditPostForm);

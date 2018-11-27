@@ -1,10 +1,11 @@
-import React, { Component } from "react";
-import CommentList from "./CommentList";
-import CommentForm from "./CommentForm";
-import Layout from "./Layout";
+import React, { Component } from 'react';
+import { Helmet } from 'react-helmet';
+import CommentList from '../containers/CommentList';
+import CommentForm from './CommentForm';
 
-import { withUser } from "../contexts/UserContext";
-import { withPage } from "../contexts/PageContext";
+import { withUser } from '../contexts/UserContext';
+import { withPage } from '../contexts/PageContext';
+import { withLoading } from '../hoc/withLoading';
 
 class PostDetailView extends Component {
   render() {
@@ -15,15 +16,16 @@ class PostDetailView extends Component {
       username,
       comments,
       commentUserList,
-      loading,
       currentPostId,
       onEditPostForm,
       onPostList,
-      id
+      id,
     } = this.props;
-    console.log(commentUserList);
     return (
-      <Layout>
+      <React.Fragment>
+        <Helmet>
+          <title>게시물 - {title}</title>
+        </Helmet>
         {userId === id && (
           <React.Fragment>
             <button onClick={() => onEditPostForm(currentPostId)}>수정</button>
@@ -36,18 +38,18 @@ class PostDetailView extends Component {
           <div>쓴 사람: {username}</div>
           <div
             style={{
-              margin: "10px",
-              padding: "10px",
-              border: "1px solid #aaa"
+              margin: '10px',
+              padding: '10px',
+              border: '1px solid #aaa',
             }}
           >
             {body}
           </div>
           <div
             style={{
-              margin: "10px",
-              padding: "10px",
-              border: "1px solid #aaa"
+              margin: '10px',
+              padding: '10px',
+              border: '1px solid #aaa',
             }}
           >
             {comments && comments.length > 0 ? (
@@ -64,9 +66,9 @@ class PostDetailView extends Component {
             />
           </div>
         </div>
-      </Layout>
+      </React.Fragment>
     );
   }
 }
 
-export default withPage(withUser(PostDetailView));
+export default withLoading(withPage(withUser(PostDetailView)));

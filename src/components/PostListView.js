@@ -1,20 +1,22 @@
-import React from "react";
-import classNames from "classnames";
+import React from 'react';
+import classNames from 'classnames';
+import { Helmet } from 'react-helmet';
 
-import Layout from "./Layout";
-import { withPage } from "../contexts/PageContext";
+import { withPage } from '../contexts/PageContext';
 
-import "./PostList.scss";
+import './PostList.scss';
+import { withLoading } from '../hoc/withLoading';
 
 function PostListView(props) {
   const { posts, loading, onPostDetail, onNewPostForm } = props;
-  const titleClass = classNames("PostList__title", {
-    "PostList__title--loading": loading
+  const titleClass = classNames('PostList__title', {
+    'PostList__title--loading': loading,
   });
-  console.log(posts)
   return (
-    <Layout title="게시물 목록">
-      <h1 className={titleClass}>게시물 목록</h1>
+    <React.Fragment>
+      <Helmet>
+        <title className={titleClass}>게시물 목록</title>
+      </Helmet>
       {posts && posts.length > 0 ? (
         <ul className="PostList__list">
           {posts.map(post => (
@@ -31,8 +33,8 @@ function PostListView(props) {
         <div>게시물이 없습니다.</div>
       )}
       <button onClick={onNewPostForm}>새 글 쓰기</button>
-    </Layout>
+    </React.Fragment>
   );
 }
 
-export default withPage(PostListView);
+export default withLoading(withPage(PostListView));
