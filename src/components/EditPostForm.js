@@ -1,32 +1,32 @@
-import React, { Component } from "react";
-import api from "../api";
-import PostForm from "./PostForm";
+import React, { Component } from 'react';
+import api from '../api';
+import PostForm from './PostForm';
 
-import { withLoading } from "../hoc/withLoading";
-import { withPage } from "../contexts/PageContext";
+import { withLoading } from '../hoc/withLoading';
+import { withPage } from '../contexts/PageContext';
 
 class EditPostForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: "",
-      body: ""
+      title: '',
+      body: '',
     };
   }
   async componentDidMount() {
     const {
-      data: { title, body }
-    } = await api.get("posts/" + this.props.currentPostId);
+      data: { title, body },
+    } = await api.get('posts/' + this.props.currentPostId);
     this.setState({
       title,
-      body
+      body,
     });
   }
 
   async handleSubmit(title, body) {
-    const { data: id } = await api.patch("/posts/" + this.props.currentPostId, {
+    const { data: id } = await api.patch('/posts/' + this.props.currentPostId, {
       title,
-      body
+      body,
     });
     this.props.onPostDetail(id);
   }
@@ -44,4 +44,4 @@ class EditPostForm extends Component {
   }
 }
 
-export default withPage(EditPostForm)
+export default withPage(EditPostForm);

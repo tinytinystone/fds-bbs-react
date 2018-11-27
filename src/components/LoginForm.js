@@ -1,6 +1,6 @@
-import React from "react";
-import { UserConsumer } from "../contexts/UserContext";
-import { Form, Button } from "semantic-ui-react";
+import React from 'react';
+import { UserConsumer } from '../contexts/UserContext';
+import { Form, Button } from 'semantic-ui-react';
 
 class LoginForm extends React.Component {
   static defaultProps = {
@@ -9,7 +9,7 @@ class LoginForm extends React.Component {
     login: (username, password) => {},
     // 회원가입 버튼을 눌렀을 때 호출되는 함수
     // onRegister: null,
-    onModal: () => {}
+    onModal: () => {},
   };
   async handleSubmit(e) {
     e.preventDefault();

@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import LoginForm from './LoginForm';
 import RegisterForm from './RegisterForm';
 
@@ -8,6 +8,6 @@ export default class Header extends Component {
       <div>
         <LoginForm />
       </div>
-    )
+    );
   }
 }

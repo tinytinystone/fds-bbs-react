@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
 export default class CommentList extends Component {
   render() {
@@ -8,13 +8,16 @@ export default class CommentList extends Component {
         <h2>댓글</h2>
         <ul>
           {comments.map(comment => {
-            const user = commentUserList.find(user => user.id === comment.userId);
-            return  <li key={comment.id}>
-              <span>{user.username}</span>
+            const user = commentUserList.find(
+              user => user.id === comment.userId
+            );
+            return (
+              <li key={comment.id}>
+                <span>{user.username}</span>
                 {comment.body}
               </li>
-          }
-        )}
+            );
+          })}
         </ul>
       </div>
     );

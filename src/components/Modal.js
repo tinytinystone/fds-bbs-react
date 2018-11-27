@@ -1,7 +1,7 @@
-import { Component } from 'react'
-import ReactDOM from "react-dom";
+import { Component } from 'react';
+import ReactDOM from 'react-dom';
 
-const modalRoot = document.getElementById("modal-root");
+const modalRoot = document.getElementById('modal-root');
 
 export default class Modal extends Component {
   constructor(props) {
@@ -9,7 +9,7 @@ export default class Modal extends Component {
     // Create a div that we'll render the modal into. Because each
     // Modal component has its own element, we can render multiple
     // modal components into the modal container.
-    this.el = document.createElement("div");
+    this.el = document.createElement('div');
   }
 
   componentDidMount() {

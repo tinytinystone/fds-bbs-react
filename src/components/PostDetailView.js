@@ -1,10 +1,10 @@
-import React, { Component } from "react";
-import CommentList from "./CommentList";
-import CommentForm from "./CommentForm";
-import Layout from "./Layout";
+import React, { Component } from 'react';
+import CommentList from './CommentList';
+import CommentForm from './CommentForm';
+import Layout from './Layout';
 
-import { withUser } from "../contexts/UserContext";
-import { withPage } from "../contexts/PageContext";
+import { withUser } from '../contexts/UserContext';
+import { withPage } from '../contexts/PageContext';
 
 class PostDetailView extends Component {
   render() {
@@ -19,7 +19,7 @@ class PostDetailView extends Component {
       currentPostId,
       onEditPostForm,
       onPostList,
-      id
+      id,
     } = this.props;
     return (
       <React.Fragment>
@@ -35,18 +35,18 @@ class PostDetailView extends Component {
           <div>쓴 사람: {username}</div>
           <div
             style={{
-              margin: "10px",
-              padding: "10px",
-              border: "1px solid #aaa"
+              margin: '10px',
+              padding: '10px',
+              border: '1px solid #aaa',
             }}
           >
             {body}
           </div>
           <div
             style={{
-              margin: "10px",
-              padding: "10px",
-              border: "1px solid #aaa"
+              margin: '10px',
+              padding: '10px',
+              border: '1px solid #aaa',
             }}
           >
             {comments && comments.length > 0 ? (
