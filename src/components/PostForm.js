@@ -1,22 +1,30 @@
 import React, { Component } from "react";
 import s from "./PostForm.module.scss";
-import classNames from 'classnames';
+import classNames from "classnames";
 import { withLoader } from "./Loader";
 
 class PostForm extends Component {
   static defaultProps = {
     // true가 주어지면 편집모드 스타일이 적용됨. (이렇게 설명을 써준다.)
-    editing: false
-  }
+    editing: false,
+    // 폼 전송 시 호출되는 함수. 이벤트 객체가 아니라 title과 body를 인수로 받음.
+    onSubmit: () => {}
+  };
   render() {
-    console.log(this.props)
-    const { editing } = this.props;
+    const { editing, onSubmit } = this.props;
     const titleClass = classNames(s.titleInput, {
       [s.editing]: editing
-    })
+    });
     return (
       <div>
-        <form onSubmit={e => this.props.onSubmit(e)}>
+        <form
+          onSubmit={e => {
+            e.preventDefault();
+            const title = e.target.elements.title.value
+            const body = e.target.elements.body.value;
+            this.props.onSubmit(title, body);
+          }}
+        >
           <label htmlFor="title">제목</label>
           <input
             className={titleClass}
@@ -38,5 +46,4 @@ class PostForm extends Component {
   }
 }
 
-
-export default withLoader(PostForm)
+export default withLoader(PostForm);
