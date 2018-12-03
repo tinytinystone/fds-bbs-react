@@ -19,7 +19,7 @@ class LoginForm extends React.Component {
     await this.props.login(username, password);
   }
   render() {
-    const { onRegister, onModal } = this.props;
+    const { onRegister } = this.props;
     return (
       <React.Fragment>
         <Form onSubmit={e => this.handleSubmit(e)}>

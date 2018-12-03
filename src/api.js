@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'https://atom-stew.glitch.me/',
+  baseURL: process.env.REACT_APP_API_URL,
 });
 
 api.interceptors.request.use(function(config) {
